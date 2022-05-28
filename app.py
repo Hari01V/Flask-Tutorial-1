@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from flask import Flask, render_template, request
+
+# IMPORT ML MODEL
 
 app = Flask(__name__)
 
@@ -15,7 +16,12 @@ def predict():
     image_path = './images/' + imageFile.filename
     imageFile.save(image_path)
 
-    return render_template('index.html')
+    # PREDICT USING THE MODEL
+    # FOR NOW ASSUME THE PREDICTED RESULT IS OBTAINED
+
+    classification = "Hi there, 90% local data"
+
+    return render_template('index.html', prediction=classification)
 
 
 if __name__ == '__main__':

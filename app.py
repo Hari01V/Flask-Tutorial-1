@@ -1,10 +1,22 @@
-from flask import Flask
+from django.shortcuts import render
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'])
 def hello_world():
-  return "Hello World"
+    return render_template('index.html')
+
+
+@app.route('/', methods=['POST'])
+def predict():
+    imageFile = request.files['imageFile']
+    image_path = './images/' + imageFile.filename
+    imageFile.save(image_path)
+
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
-  app.run(port=3000, debug=True)
+    app.run(port=3000, debug=True)
